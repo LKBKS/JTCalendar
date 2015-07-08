@@ -17,6 +17,7 @@
 @optional
 
 - (BOOL)calendar:(JTCalendar *)calendar canSelectDate:(NSDate *)date;
+- (int)numberOfCalendarEvents:(JTCalendar *)calendar date:(NSDate *)date;
 
 - (void)calendarDidLoadPreviousPage;
 - (void)calendarDidLoadNextPage;

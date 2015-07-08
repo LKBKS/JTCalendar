@@ -57,11 +57,18 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  */
 @property (assign, nonatomic) CGFloat ratioContentMenu;
 
+
+/**
+ *	The default value of this property is @c 20.
+ */
+
+@property (assign, nonatomic) CGFloat weekDaysHeight;
 /**
  *	The default value of this property is @c YES.
  */
 @property (assign, nonatomic) BOOL autoChangeMonth;
 @property (copy, nonatomic) JTCalendarMonthBlock monthBlock;
+@property (nonatomic) UIColor *weekSeparatorColor;
 
 #pragma mark - Weekday
 
@@ -75,6 +82,10 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  *	@code [UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.] @endcode
  */
 @property (nonatomic) UIColor *weekDayTextColor;
+
+
+@property (nonatomic) UIColor *weekendDayTextColor;
+
 
 /**
  *	The default value of this property is:
@@ -175,6 +186,8 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  */
 @property (nonatomic) UIFont *dayTextFont;
 
+@property (nonatomic) UIFont *dayTextFontSelected;
+
 /**
  *	The default value of this property is @c dd.
  */
@@ -206,6 +219,16 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  *	The default value of this property is @c 1.0 / 9.0.
  */
 @property (assign, nonatomic) CGFloat dayDotRatio;
+
+/**
+ *	The default value of this property is @c 1.0 / 1.0.
+ */
+@property (assign, nonatomic) CGFloat dayLabelHeightRatio;
+
+/**
+ *	The default value of this property is @c 1.0
+ */
+@property (assign, nonatomic) CGFloat dayLabelTopSpaceConstant;
 
 /**
  *	The default value of this property is a @c Gregorian calendar.

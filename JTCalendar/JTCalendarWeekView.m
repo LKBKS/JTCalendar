@@ -11,6 +11,7 @@
 
 @interface JTCalendarWeekView (){
     NSArray *daysViews;
+    UIView *weekSeparator;
 };
 
 @end
@@ -61,17 +62,34 @@
     CGFloat width = self.frame.size.width / 7.;
     CGFloat height = self.frame.size.height;
     
-    if(self.calendarManager.calendarAppearance.readFromRightToLeft){
+    JTCalendarAppearance *calendarAppearance = self.calendarManager.calendarAppearance;
+    
+    if(calendarAppearance.readFromRightToLeft){
         for(UIView *view in [[self.subviews reverseObjectEnumerator] allObjects]){
             view.frame = CGRectMake(x, 0, width, height);
             x = CGRectGetMaxX(view.frame);
         }
     }
     else{
-        for(UIView *view in self.subviews){
+        for(UIView *view in daysViews){
             view.frame = CGRectMake(x, 0, width, height);
             x = CGRectGetMaxX(view.frame);
         }
+    }
+    
+    if (!calendarAppearance.isWeekMode) {
+        
+        if (!weekSeparator) {
+            weekSeparator = [[UIView alloc] init];
+            [self addSubview:weekSeparator];
+        }
+        
+        CGRect frame = CGRectMake(0, 0, self.frame.size.width, 1);
+        weekSeparator.frame = frame;
+        weekSeparator.backgroundColor = calendarAppearance.weekSeparatorColor;
+    } else {
+        [weekSeparator removeFromSuperview];
+        weekSeparator = nil;
     }
     
     [super layoutSubviews];

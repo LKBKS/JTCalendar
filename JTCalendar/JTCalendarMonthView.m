@@ -81,26 +81,30 @@
     CGFloat weeksToDisplay;
     
     if(cacheLastWeekMode){
-        weeksToDisplay = 2.;
+        weeksToDisplay = 1.;
     }
     else{
-        weeksToDisplay = (CGFloat)(WEEKS_TO_DISPLAY + 1); // + 1 for weekDays
+        weeksToDisplay = (CGFloat)(WEEKS_TO_DISPLAY);
     }
     
-    CGFloat y = 0;
+    CGFloat weekdaysHeight = self.calendarManager.calendarAppearance.weekDaysHeight;
+
+    __block CGFloat y = weekdaysHeight;
     CGFloat width = self.frame.size.width;
-    CGFloat height = self.frame.size.height / weeksToDisplay;
+    __block CGFloat height = (self.frame.size.height - weekdaysHeight) / weeksToDisplay;
     
-    for(int i = 0; i < self.subviews.count; ++i){
-        UIView *view = self.subviews[i];
-        
+    weekdaysView.frame = CGRectMake(0, 0, width, weekdaysHeight);
+    
+    
+    [weeksViews enumerateObjectsUsingBlock:^(UIView  *view, NSUInteger idx, BOOL *stop) {
         view.frame = CGRectMake(0, y, width, height);
         y = CGRectGetMaxY(view.frame);
         
-        if(cacheLastWeekMode && i == weeksToDisplay - 1){
+        if(cacheLastWeekMode && idx == weeksToDisplay - 1){
             height = 0.;
         }
-    }
+    }];
+    
 }
 
 - (void)setBeginningOfMonth:(NSDate *)date

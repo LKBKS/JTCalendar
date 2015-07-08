@@ -36,18 +36,25 @@ static NSArray *cacheDaysOfWeeks;
 }
 
 - (void)commonInit
-{    
-    for(NSString *day in [self daysOfWeek]){
+{
+    JTCalendarAppearance *calendarAppearance = self.calendarManager.calendarAppearance;
+    
+    [[self daysOfWeek] enumerateObjectsUsingBlock:^(NSString *day, NSUInteger idx, BOOL *stop) {
         UILabel *view = [UILabel new];
         
-        view.font = self.calendarManager.calendarAppearance.weekDayTextFont;
-        view.textColor = self.calendarManager.calendarAppearance.weekDayTextColor;
+        view.font = calendarAppearance.weekDayTextFont;
+        
+        if (idx == 0 || idx == 6) {
+            view.textColor = calendarAppearance.weekendDayTextColor;
+        } else {
+            view.textColor = calendarAppearance.weekDayTextColor;
+        }
         
         view.textAlignment = NSTextAlignmentCenter;
         view.text = day;
         
         [self addSubview:view];
-    }
+    }];
 }
 
 - (NSArray *)daysOfWeek
@@ -125,7 +132,11 @@ static NSArray *cacheDaysOfWeeks;
         UILabel *view = [self.subviews objectAtIndex:i];
         
         view.font = self.calendarManager.calendarAppearance.weekDayTextFont;
-        view.textColor = self.calendarManager.calendarAppearance.weekDayTextColor;
+        if (i == 0 || i == 6) {
+            view.textColor = self.calendarManager.calendarAppearance.weekendDayTextColor;
+        } else {
+            view.textColor = self.calendarManager.calendarAppearance.weekDayTextColor;
+        }
         
         view.text = [[self daysOfWeek] objectAtIndex:i];
     }

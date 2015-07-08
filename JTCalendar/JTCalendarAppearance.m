@@ -39,6 +39,7 @@
     
     self.menuMonthTextFont = [UIFont systemFontOfSize:17.];
     self.weekDayTextFont = [UIFont systemFontOfSize:11];
+    self.weekDaysHeight = 20.0;
     self.dayTextFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 
     self.dayFormat = @"dd";
@@ -50,6 +51,8 @@
     
     self.menuMonthTextColor = [UIColor blackColor];
     self.weekDayTextColor = [UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.];
+    
+    self.weekendDayTextColor = self.weekDayTextColor;
     
     [self setDayDotColorForAll:[UIColor colorWithRed:43./256. green:88./256. blue:134./256. alpha:1.]];
     [self setDayTextColorForAll:[UIColor blackColor]];
@@ -63,15 +66,17 @@
     self.dayCircleColorSelectedOtherMonth = self.dayCircleColorSelected;
     self.dayTextColorSelectedOtherMonth = self.dayTextColorSelected;
     self.dayDotColorSelectedOtherMonth = self.dayDotColorSelected;
-    
+    self.dayTextFontSelected = self.dayTextFont;
+
     self.dayCircleColorToday = [UIColor colorWithRed:0x33/256. green:0xB3/256. blue:0xEC/256. alpha:.5];
     self.dayTextColorToday = [UIColor whiteColor];
     self.dayDotColorToday = [UIColor whiteColor];
-    
+    self.dayLabelTopSpaceConstant = 0;
+    self.dayLabelHeightRatio = 1.0;
     self.dayCircleColorTodayOtherMonth = self.dayCircleColorToday;
     self.dayTextColorTodayOtherMonth = self.dayTextColorToday;
     self.dayDotColorTodayOtherMonth = self.dayDotColorToday;
-    
+    self.weekSeparatorColor = [UIColor clearColor];
     self.monthBlock = ^NSString *(NSDate *date, JTCalendar *jt_calendar){
         NSCalendar *calendar = jt_calendar.calendarAppearance.calendar;
         NSDateComponents *comps = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth fromDate:date];

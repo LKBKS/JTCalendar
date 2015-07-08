@@ -61,4 +61,27 @@
     return haveEvent;
 }
 
+- (int)numberOfEvents:(NSDate *)date
+{
+    if(!self.calendarManager.dataSource){
+        return 0;
+    }
+    
+    if(!self.calendarManager.calendarAppearance.useCacheSystem){
+        return [self.calendarManager.dataSource numberOfCalendarEvents:self.calendarManager date:date];
+    }
+    
+    int numberOfEvents;
+    NSString *key = [dateFormatter stringFromDate:date];
+    
+    if(events[key] != nil){
+        numberOfEvents = [events[key] intValue];
+    }
+    else{
+        numberOfEvents = [self.calendarManager.dataSource numberOfCalendarEvents:self.calendarManager date:date];
+        events[key] = [NSNumber numberWithInt:numberOfEvents];
+    }
+    
+    return numberOfEvents;
+}
 @end

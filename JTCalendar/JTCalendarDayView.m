@@ -13,7 +13,7 @@
     UIView *backgroundView;
     JTCircleView *circleView;
     UILabel *textLabel;
-    JTCircleView *dotView;
+    NSArray *dotViews;
     
     BOOL isSelected;
     
@@ -76,12 +76,6 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     }
     
     {
-        dotView = [JTCircleView new];
-        [self addSubview:dotView];
-        dotView.hidden = YES;
-    }
-    
-    {
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouch)];
 
         self.userInteractionEnabled = YES;
@@ -103,7 +97,12 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 // Avoid to calcul constraints (very expensive)
 - (void)configureConstraintsForSubviews
 {
-    textLabel.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    JTCalendarAppearance *calendarAppearance = self.calendarManager.calendarAppearance;
+    
+    CGFloat y = calendarAppearance.dayLabelTopSpaceConstant;
+    CGFloat height = self.frame.size.height * calendarAppearance.dayLabelHeightRatio;
+    
+    textLabel.frame = CGRectMake(0, y, self.frame.size.width, height);
     backgroundView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 
 
@@ -117,12 +116,21 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     sizeDot = roundf(sizeDot);
     
     circleView.frame = CGRectMake(0, 0, sizeCircle, sizeCircle);
-    circleView.center = CGPointMake(self.frame.size.width / 2., self.frame.size.height / 2.);
+    circleView.center = textLabel.center;
     circleView.layer.cornerRadius = sizeCircle / 2.;
     
-    dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);
-    dotView.center = CGPointMake(self.frame.size.width / 2., (self.frame.size.height / 2.) +sizeDot * 2.5);
-    dotView.layer.cornerRadius = sizeDot / 2.;
+    CGFloat x = 0.0;
+    y = (self.frame.size.height / 2.) +sizeDot * 2.5;
+    int dotCounter = 0;
+    for (JTCircleView *dotView in dotViews) {
+        dotCounter++;
+        if (dotCounter >= 4) {
+            y += sizeDot * 2.5;
+        }
+        dotView.frame = CGRectMake(x, y, sizeDot, sizeDot);
+        dotView.layer.cornerRadius = sizeDot / 2.;
+        x = CGRectGetMaxX(dotView.frame);
+    }
 }
 
 - (void)setDate:(NSDate *)date
@@ -204,14 +212,14 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
         if(!self.isOtherMonth){
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelected];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelected];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelected];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelected];
         }
         else{
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorSelectedOtherMonth];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorSelectedOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColorSelectedOtherMonth];
         }
-        
+        textLabel.font = self.calendarManager.calendarAppearance.dayTextFontSelected;
         circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1);
         tr = CGAffineTransformIdentity;
     }
@@ -219,24 +227,25 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
         if(!self.isOtherMonth){
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorToday];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorToday];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorToday];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColorToday];
         }
         else{
             circleView.color = [self.calendarManager.calendarAppearance dayCircleColorTodayOtherMonth];
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorTodayOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorTodayOtherMonth];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColorTodayOtherMonth];
         }
+        textLabel.font = self.calendarManager.calendarAppearance.dayTextFont;
     }
     else{
         if(!self.isOtherMonth){
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColor];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColor];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColor];
         }
         else{
             textLabel.textColor = [self.calendarManager.calendarAppearance dayTextColorOtherMonth];
-            dotView.color = [self.calendarManager.calendarAppearance dayDotColorOtherMonth];
+//            dotView.color = [self.calendarManager.calendarAppearance dayDotColorOtherMonth];
         }
-        
+        textLabel.font = self.calendarManager.calendarAppearance.dayTextFont;
         opacity = 0.;
     }
     
@@ -252,6 +261,7 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     }
 }
 
+
 - (void)setIsOtherMonth:(BOOL)isOtherMonth
 {
     self->_isOtherMonth = isOtherMonth;
@@ -260,7 +270,18 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 - (void)reloadData
 {
-    dotView.hidden = ![self.calendarManager.dataCache haveEvent:self.date];
+    int numberOfEvents = [self.calendarManager.dataCache numberOfEvents:self.date];
+    if (numberOfEvents > 8) numberOfEvents = 8;
+    
+    if (!dotViews) {
+        NSMutableArray *dotArray = [NSMutableArray arrayWithCapacity:numberOfEvents];
+        for (int i = 0; i < numberOfEvents; i++) {
+            JTCircleView *dotView = [JTCircleView new];
+            [self addSubview:dotView];
+            [dotArray addObject:dotView];
+        }
+        dotViews = dotArray;
+    }
     
     BOOL selected = [self isSameDate:[self.calendarManager currentDateSelected]];
     [self setSelected:selected animated:NO];
