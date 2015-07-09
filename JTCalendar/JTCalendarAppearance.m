@@ -37,6 +37,9 @@
     self.dayCircleRatio = 1.;
     self.dayDotRatio = 1. / 9.;
     self.dayDotDiameter = 5;
+    self.dayDotMargin = 2.0;
+    self.dayDotLineLimit = 4;
+    self.dayDotTopSpace = 4.0;
 
     self.menuMonthTextFont = [UIFont systemFontOfSize:17.];
     self.weekDayTextFont = [UIFont systemFontOfSize:11];

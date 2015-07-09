@@ -115,23 +115,24 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
 
 
     CGFloat sizeCircle = MIN(self.frame.size.width, self.frame.size.height);
-    CGFloat sizeDot = sizeCircle;
     
     sizeCircle = sizeCircle * self.calendarManager.calendarAppearance.dayCircleRatio;
-    sizeDot = sizeDot * self.calendarManager.calendarAppearance.dayDotRatio;
     
     sizeCircle = roundf(sizeCircle);
-    sizeDot = roundf(sizeDot);
     
     circleView.frame = CGRectMake(0, 0, sizeCircle, sizeCircle);
     circleView.center = textLabel.center;
     circleView.layer.cornerRadius = sizeCircle / 2.;
     
     y = CGRectGetMaxY(textLabel.frame);
-    y += 4;
-    CGFloat width = 4 * (sizeDot + 1);
-    dotViews.frame = CGRectMake(0, y, width, 2 * width);
-    dotViews.center = CGPointMake(backgroundView.center.x, dotViews.center.y);
+    y += self.calendarManager.calendarAppearance.dayDotTopSpace;
+    CGFloat sizeDot = self.calendarManager.calendarAppearance.dayDotDiameter;
+    CGFloat dotMargin = self.calendarManager.calendarAppearance.dayDotMargin;
+    int dayDotLineLimit = self.calendarManager.calendarAppearance.dayDotLineLimit;
+    CGFloat width = dayDotLineLimit * (sizeDot + dotMargin);
+    height = 2 * (sizeDot + dotMargin);
+    dotViews.frame = CGRectMake(0, y, width, height);
+    dotViews.center = CGPointMake(textLabel.center.x, dotViews.center.y);
 }
 
 - (void)setDate:(NSDate *)date
@@ -328,8 +329,8 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     backgroundView.layer.borderWidth = self.calendarManager.calendarAppearance.dayBorderWidth;
     backgroundView.layer.borderColor = self.calendarManager.calendarAppearance.dayBorderColor.CGColor;
     [self configureConstraintsForSubviews];
-    [dotViews reloadAppearance];
     [self setSelected:isSelected animated:NO];
+    [dotViews reloadAppearance];
 }
 
 - (void)setCalendarManager:(JTCalendar *)calendarManager

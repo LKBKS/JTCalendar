@@ -219,7 +219,28 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
  *	The default value of this property is @c 1.0 / 9.0.
  */
 @property (assign, nonatomic) CGFloat dayDotRatio;
+
+
+/**
+ *	The default value of this property is @c 5.0.
+ */
 @property (assign, nonatomic) CGFloat dayDotDiameter;
+
+/**
+ *	The default value of this property is @c 2.
+ */
+@property (assign, nonatomic) CGFloat dayDotMargin;
+
+/**
+ *	The default value of this property is @c 4
+ */
+@property (assign, nonatomic) int dayDotLineLimit;
+
+
+/**
+ *	The default value of this property is @c 4.0
+ */
+@property (assign, nonatomic) CGFloat dayDotTopSpace;
 
 /**
  *	The default value of this property is @c 1.0 / 1.0.
