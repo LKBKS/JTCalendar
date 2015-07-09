@@ -9,7 +9,6 @@
 
 #import "JTCircleView.h"
 #import "JTCalendarDotsView.h"
-#import "CustomView.h"
 
 @interface JTCalendarDayView (){
     UIView *backgroundView;
