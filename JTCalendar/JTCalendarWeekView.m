@@ -77,20 +77,15 @@
         }
     }
     
-    if (!calendarAppearance.isWeekMode) {
-        
-        if (!weekSeparator) {
-            weekSeparator = [[UIView alloc] init];
-            [self addSubview:weekSeparator];
-        }
-        
-        CGRect frame = CGRectMake(0, 0, self.frame.size.width, 1);
-        weekSeparator.frame = frame;
-        weekSeparator.backgroundColor = calendarAppearance.weekSeparatorColor;
-    } else {
-        [weekSeparator removeFromSuperview];
-        weekSeparator = nil;
+    
+    if (!weekSeparator) {
+        weekSeparator = [[UIView alloc] init];
+        [self addSubview:weekSeparator];
     }
+    
+    CGRect frame = CGRectMake(0, 0, self.frame.size.width, 1);
+    weekSeparator.frame = frame;
+    weekSeparator.backgroundColor = calendarAppearance.weekSeparatorColor;
     
     [super layoutSubviews];
 }

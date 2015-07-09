@@ -15,7 +15,7 @@
 @interface JTCalendarMonthView (){
     JTCalendarMonthWeekDaysView *weekdaysView;
     NSArray *weeksViews;
-    
+    UIView *monthSeparator;
     NSUInteger currentMonthIndex;
     BOOL cacheLastWeekMode; // Avoid some operations
 };
@@ -105,6 +105,15 @@
         }
     }];
     
+    if (!monthSeparator) {
+        monthSeparator = [[UIView alloc] init];
+        [self addSubview:monthSeparator];
+    }
+
+    CGRect frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1);
+    monthSeparator.frame = frame;
+    monthSeparator.backgroundColor = self.calendarManager.calendarAppearance.weekSeparatorColor;
+    
 }
 
 - (void)setBeginningOfMonth:(NSDate *)date
@@ -123,7 +132,7 @@
             currentMonthIndex = (currentMonthIndex % 12) + 1;
         }
     }
-        
+    
     for(JTCalendarWeekView *view in weeksViews){
         view.currentMonthIndex = currentMonthIndex;
         [view setBeginningOfWeek:currentDate];
