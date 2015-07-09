@@ -45,6 +45,7 @@
     self.weekDayTextFont = [UIFont systemFontOfSize:11];
     self.weekDaysHeight = 20.0;
     self.dayTextFont = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    self.weekSeparatorHeight = 0.5;
 
     self.dayFormat = @"dd";
 

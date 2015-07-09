@@ -109,8 +109,9 @@
         monthSeparator = [[UIView alloc] init];
         [self addSubview:monthSeparator];
     }
-
-    CGRect frame = CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1);
+    
+    CGFloat weekSeparatorHeight = self.calendarManager.calendarAppearance.weekSeparatorHeight;
+    CGRect frame = CGRectMake(0, self.frame.size.height - weekSeparatorHeight, self.frame.size.width, weekSeparatorHeight);
     monthSeparator.frame = frame;
     monthSeparator.backgroundColor = self.calendarManager.calendarAppearance.weekSeparatorColor;
     

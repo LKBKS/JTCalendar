@@ -88,6 +88,12 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 
 
 /**
+ *	The default value of this property is @c 0.5
+ */
+
+@property (assign, nonatomic) CGFloat weekSeparatorHeight;
+
+/**
  *	The default value of this property is:
  *	@code [UIFont systemFontOfSize:11] @endcode
  */
