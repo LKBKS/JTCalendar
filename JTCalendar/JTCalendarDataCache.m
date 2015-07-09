@@ -61,27 +61,27 @@
     return haveEvent;
 }
 
-- (int)numberOfEvents:(NSDate *)date
+- (NSArray *)eventColorsForDate:(NSDate *)date
 {
     if(!self.calendarManager.dataSource){
-        return 0;
+        return @[];
     }
     
     if(!self.calendarManager.calendarAppearance.useCacheSystem){
-        return [self.calendarManager.dataSource numberOfCalendarEvents:self.calendarManager date:date];
+        return [self.calendarManager.dataSource eventColorsForCalendar:self.calendarManager date:date];
     }
     
-    int numberOfEvents;
+    NSArray * colors;
     NSString *key = [dateFormatter stringFromDate:date];
     
     if(events[key] != nil){
-        numberOfEvents = [events[key] intValue];
+        colors = events[key];
     }
     else{
-        numberOfEvents = [self.calendarManager.dataSource numberOfCalendarEvents:self.calendarManager date:date];
-        events[key] = [NSNumber numberWithInt:numberOfEvents];
+        colors = [self.calendarManager.dataSource eventColorsForCalendar:self.calendarManager date:date];
+        events[key] = colors;
     }
     
-    return numberOfEvents;
+    return colors;
 }
 @end
