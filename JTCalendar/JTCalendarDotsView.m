@@ -110,7 +110,8 @@
 
 - (void)reloadData {
     eventColors = [self.calendarManager.dataCache eventColorsForDate:self.date];
-    if (eventColors.count > 8) eventColors = [eventColors subarrayWithRange:NSMakeRange(0, 8)];
+    int maxSize = self.calendarManager.calendarAppearance.dayDotLineWidthLimit * self.calendarManager.calendarAppearance.dayDotLineHeightLimit;
+    if (eventColors.count > maxSize) eventColors = [eventColors subarrayWithRange:NSMakeRange(0, maxSize)];
     [_dotsCollectionView reloadData];
 }
 

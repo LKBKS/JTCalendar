@@ -240,8 +240,13 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 /**
  *	The default value of this property is @c 4
  */
-@property (assign, nonatomic) int dayDotLineLimit;
+@property (assign, nonatomic) int dayDotLineWidthLimit;
 
+/**
+ *	The default value of this property is @c 2
+ */
+
+@property (assign, nonatomic) int dayDotLineHeightLimit;
 
 /**
  *	The default value of this property is @c 4.0

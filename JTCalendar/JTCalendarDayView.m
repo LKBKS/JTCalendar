@@ -128,9 +128,11 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     y += self.calendarManager.calendarAppearance.dayDotTopSpace;
     CGFloat sizeDot = self.calendarManager.calendarAppearance.dayDotDiameter;
     CGFloat dotMargin = self.calendarManager.calendarAppearance.dayDotMargin;
-    int dayDotLineLimit = self.calendarManager.calendarAppearance.dayDotLineLimit;
+    int dayDotLineLimit = self.calendarManager.calendarAppearance.dayDotLineWidthLimit;
+    int dayDotHeightLimit = self.calendarManager.calendarAppearance.dayDotLineHeightLimit;
+    
     CGFloat width = dayDotLineLimit * (sizeDot + dotMargin);
-    height = 2 * (sizeDot + dotMargin);
+    height = dayDotHeightLimit * (sizeDot + dotMargin);
     dotViews.frame = CGRectMake(0, y, width, height);
     dotViews.center = CGPointMake(textLabel.center.x, dotViews.center.y);
 }
