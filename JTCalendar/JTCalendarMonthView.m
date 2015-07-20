@@ -176,8 +176,9 @@
 
 - (void)reloadAppearance
 {
-    if(cacheLastWeekMode != self.calendarManager.calendarAppearance.isWeekMode){
-        cacheLastWeekMode = self.calendarManager.calendarAppearance.isWeekMode;
+    JTCalendarAppearance *calendarAppearance = self.calendarManager.calendarAppearance;
+    if(cacheLastWeekMode != calendarAppearance.isWeekMode || weekdaysView.frame.size.height == 0){
+        cacheLastWeekMode = calendarAppearance.isWeekMode;
         [self configureConstraintsForSubviews];
     }
     

@@ -135,6 +135,12 @@
 
 - (void)reloadAppearance
 {
+    JTCalendarAppearance *calendarAppearance = self.calendarManager.calendarAppearance;
+
+    
+    CGRect frame = CGRectMake(0, 0, self.frame.size.width, calendarAppearance.weekSeparatorHeight);
+    weekSeparator.frame = frame;
+    weekSeparator.backgroundColor = calendarAppearance.weekSeparatorColor;
     for(JTCalendarDayView *view in daysViews){
         [view reloadAppearance];
     }
