@@ -27,6 +27,13 @@ typedef NSString *(^JTCalendarMonthBlock)(NSDate *date, JTCalendar *jt_calendar)
 @property (assign, nonatomic) BOOL isWeekMode;
 
 /**
+ *	A Boolean value indicating whether the calendar should show a month or a week.
+ *
+ *	The default value of this property is @c NO.
+ */
+@property (assign, nonatomic) BOOL isDayMode;
+
+/**
  *	The default value of this property is @c YES.
  */
 @property (assign, nonatomic) BOOL useCacheSystem;

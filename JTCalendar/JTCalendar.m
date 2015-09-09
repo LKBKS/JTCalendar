@@ -172,11 +172,18 @@
     dayComponent.month = 0;
     dayComponent.day = 0;
     
-    if(!self.calendarAppearance.isWeekMode){
-        dayComponent.month = currentPage - (NUMBER_PAGES_LOADED / 2);
-    }
-    else{
+    if(self.calendarAppearance.isWeekMode){
         dayComponent.day = 7 * (currentPage - (NUMBER_PAGES_LOADED / 2));
+    }
+    else if (self.calendarAppearance.isDayMode) {
+        NSRange days = [calendar
+                        rangeOfUnit:NSDayCalendarUnit
+                               inUnit:NSMonthCalendarUnit
+                              forDate:self.currentDate];
+        
+        dayComponent.day = currentPage - (NUMBER_PAGES_LOADED /2);
+    } else {
+        dayComponent.month = currentPage - (NUMBER_PAGES_LOADED / 2);
     }
     
     if(self.calendarAppearance.readFromRightToLeft){
@@ -188,7 +195,7 @@
     
     [self setCurrentDate:currentDate];
     
-    if(!self.calendarAppearance.isWeekMode){
+    if(!self.calendarAppearance.isWeekMode && !self.calendarAppearance.isDayMode){
         self.menuMonthsView.scrollEnabled = YES;
     }
     self.contentView.scrollEnabled = YES;

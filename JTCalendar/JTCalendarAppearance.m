@@ -26,6 +26,7 @@
 - (void)setDefaultValues
 {
     self.isWeekMode = NO;
+    self.isDayMode = NO;
     
     self.weekDayFormat = JTCalendarWeekDayFormatShort;
     self.useCacheSystem = YES;
