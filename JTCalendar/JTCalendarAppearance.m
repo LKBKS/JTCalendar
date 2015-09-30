@@ -57,6 +57,7 @@
     self.dayBorderWidth = 0.0f;
     self.dayBorderColor = [UIColor clearColor];
     
+    self.menuMonthHeight = 30.0;
     self.menuMonthTextColor = [UIColor blackColor];
     self.weekDayTextColor = [UIColor colorWithRed:152./256. green:147./256. blue:157./256. alpha:1.];
     

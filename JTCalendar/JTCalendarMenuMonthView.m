@@ -57,7 +57,9 @@
 
 - (void)layoutSubviews
 {
-    textLabel.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    CGFloat height = MIN(self.calendarManager.calendarAppearance.menuMonthHeight, self.frame.size.height);
+    
+    textLabel.frame = CGRectMake(0, 0, self.frame.size.width, height);
 
     // No need to call [super layoutSubviews]
 }
