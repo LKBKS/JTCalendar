@@ -149,7 +149,7 @@
     _textLabel.text = [dateFormatter stringFromDate:_date];
     _dotViews.manager = _manager;
     [_manager.delegateManager prepareDayView:self];
-    [_dotViews reload];
+//    [_dotViews reload];
 }
 
 - (void)didTouch

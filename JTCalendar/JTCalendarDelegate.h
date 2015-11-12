@@ -66,6 +66,8 @@
  */
 - (void)calendarDidLoadNextPage:(JTCalendarManager *)calendar;
 
+- (void)calendarIsScrolling:(BOOL)isScrolling;
+
 /*!
  * Provide a view conforming to `JTCalendarPage` protocol, used as page for the contentView.
  * Return an instance of `JTCalendarPageView` by default.

@@ -9,6 +9,7 @@
 
 #import "JTHorizontalCalendarView.h"
 
+
 @implementation JTCalendarManager
 
 - (instancetype)init
@@ -48,7 +49,22 @@
     else{
         _scrollManager.horizontalContentView = nil;
     }
+    
+    [_contentView setDelegate:self];
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if(_delegate && [_delegate respondsToSelector:@selector(calendarIsScrolling:)]){
+        [_delegate calendarIsScrolling:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if(_delegate && [_delegate respondsToSelector:@selector(calendarIsScrolling:)]){
+        [_delegate calendarIsScrolling:NO];
+    }
+}
+
 
 - (void)setMenuView:(UIScrollView<JTMenu> *)menuView
 {

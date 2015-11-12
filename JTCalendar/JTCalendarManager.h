@@ -18,7 +18,7 @@
 #import "JTCalendarDelegateManager.h"
 #import "JTCalendarScrollManager.h"
 
-@interface JTCalendarManager : NSObject
+@interface JTCalendarManager : NSObject <UIScrollViewDelegate>
 
 @property (nonatomic, weak) id<JTCalendarDelegate> delegate;
 
