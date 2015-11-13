@@ -18,7 +18,7 @@
 #import "JTCalendarDelegateManager.h"
 #import "JTCalendarScrollManager.h"
 
-@interface JTCalendarManager : NSObject <UIScrollViewDelegate>
+@interface JTCalendarManager : NSObject
 
 @property (nonatomic, weak) id<JTCalendarDelegate> delegate;
 
@@ -39,6 +39,12 @@
 - (NSDate *)date;
 - (void)setDate:(NSDate *)date;
 - (void)reload;
+
+//  Used only for date selection
+- (void)forceReload;
+
+//  Used for reloading day dots view
+- (void)reloadDayDotsView;
 
 
 @end

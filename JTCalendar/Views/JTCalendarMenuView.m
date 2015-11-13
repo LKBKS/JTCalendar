@@ -210,4 +210,18 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
     [self repositionViews];
 }
 
+#pragma mark - Properties
+
+- (BOOL)scrolling
+{
+        return self.scrollView.dragging || self.scrollView.decelerating;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [_manager.scrollManager endHorizontalScrollingAnimation];
+}
+
 @end

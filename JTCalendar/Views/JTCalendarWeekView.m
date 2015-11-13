@@ -84,6 +84,21 @@
         dayDate = [_manager.dateHelper addToDate:dayDate days:1];
     }
 }
+- (void)forceReload {
+    for(UIView<JTCalendarDay> *dayView in _daysViews){
+        // Must done before setDate to dayView for `prepareDayView` method
+        [dayView forceReload];
+    }
+}
+
+- (void)reloadDayDotsView {
+    for(UIView<JTCalendarDay> *dayView in _daysViews){
+        // Must done before setDate to dayView for `prepareDayView` method
+        [dayView reloadDotsView];
+    }
+}
+
+
 
 - (void)createDayViews
 {

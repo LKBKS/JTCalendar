@@ -66,10 +66,19 @@
  */
 - (void)calendarDidLoadNextPage:(JTCalendarManager *)calendar;
 
-- (void)calendarIsScrolling:(BOOL)isScrolling;
+/**
+ + *  Indicates the previous page finished scrolling after becoming the current page.
+ + */
+- (void)calendarDidFinishScrollingToPreviousPage:(JTCalendarManager *)calendar;
+
+/**
+ + *  Indicates the next page finished scrolling after becoming the current page.
+ + */
+- (void)calendarDidFinishScrollingToNextPage:(JTCalendarManager *)calendar;
 
 /*!
- * Provide a view conforming to `JTCalendarPage` protocol, used as page for the contentView.
+ * Provide a view conforming to `JTCalend
+ arPage` protocol, used as page for the contentView.
  * Return an instance of `JTCalendarPageView` by default.
  */
 - (UIView<JTCalendarPage> *)calendarBuildPageView:(JTCalendarManager *)calendar;
@@ -108,6 +117,8 @@
  * Used to customize the dayView.
  */
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView;
+
+- (NSArray *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date;
 
 /*!
  * Indicate the dayView just get touched.

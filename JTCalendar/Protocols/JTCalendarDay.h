@@ -18,5 +18,6 @@
 
 - (BOOL)isFromAnotherMonth;
 - (void)setIsFromAnotherMonth:(BOOL)isFromAnotherMonth;
-
+- (void)forceReload;
+- (void)reloadDotsView;
 @end

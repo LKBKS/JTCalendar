@@ -15,5 +15,7 @@
 
 - (NSDate *)startDate;
 - (void)setStartDate:(NSDate *)startDate updateAnotherMonth:(BOOL)enable monthDate:(NSDate *)monthDate;
+- (void)forceReload;
+- (void)reloadDayDotsView;
 
 @end

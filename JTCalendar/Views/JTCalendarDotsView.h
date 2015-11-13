@@ -12,7 +12,6 @@
 
 @interface JTCalendarDotsView : UIView
 @property (weak, nonatomic) JTCalendarManager *manager;
-@property (nonatomic) NSDate *date;
 
 - (void)setEventColors:(NSArray *)colors;
 - (void)reload;

@@ -60,7 +60,6 @@
     {
         _dotViews = [JTCalendarDotsView new];
         _dotViews.manager = _manager;
-        _dotViews.date = self.date;
         [self addSubview:_dotViews];
     }
     
@@ -132,10 +131,13 @@
 {
     NSAssert(date != nil, @"date cannot be nil");
     NSAssert(_manager != nil, @"manager cannot be nil");
-    
-    self->_date = date;
-    [_dotViews setDate:_date];
-    [self reload];
+    if (_date == nil || [date compare:_date] != NSOrderedSame) {
+        self->_date = date;
+        _dotViews.hidden = true;
+        [self reload];
+    } else {
+        self->_date = date;
+    }
 }
 
 - (void)reload
@@ -149,7 +151,16 @@
     _textLabel.text = [dateFormatter stringFromDate:_date];
     _dotViews.manager = _manager;
     [_manager.delegateManager prepareDayView:self];
-//    [_dotViews reload];
+}
+
+- (void)forceReload
+{
+    [_manager.delegateManager prepareDayView:self];
+}
+
+- (void)reloadDotsView {
+    NSArray* colors = [_manager.delegateManager calendar:_manager eventColorsForDate:_date];
+    [_dotViews setEventColors:colors];
 }
 
 - (void)didTouch

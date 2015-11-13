@@ -439,6 +439,17 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
     }
 }
 
+- (void)forceReload
+{
+    [_leftView forceReload];
+    [_centerView forceReload];
+    [_rightView forceReload];
+}
+
+- (void)reloadDayDotsView {
+    [_centerView reloadDayDotsView];
+}
+
 - (void)updateMenuDates
 {
     [_manager.scrollManager setMenuPreviousDate:_leftView.date

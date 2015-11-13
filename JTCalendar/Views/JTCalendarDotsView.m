@@ -114,6 +114,7 @@
     } else {
         eventColors = colors;
     }
+    self.hidden = NO;
     [_dotsCollectionView reloadData];
 }
 

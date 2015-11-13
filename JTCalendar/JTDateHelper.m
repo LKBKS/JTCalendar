@@ -25,6 +25,7 @@
 #endif
         _calendar.timeZone = [NSTimeZone localTimeZone];
         _calendar.locale = [NSLocale currentLocale];
+        [_calendar setFirstWeekday:1];
     }
     
     return _calendar;

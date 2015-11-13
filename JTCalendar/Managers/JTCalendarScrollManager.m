@@ -39,4 +39,13 @@
     _horizontalContentView.contentOffset = CGPointMake(percentage * _horizontalContentView.contentSize.width, 0);
 }
 
+- (void)endHorizontalScrollingAnimation
+{
+    if(![_horizontalContentView.delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]){
+        return;
+    }
+    
+    [_horizontalContentView.delegate scrollViewDidEndScrollingAnimation:_horizontalContentView];
+}
+
 @end

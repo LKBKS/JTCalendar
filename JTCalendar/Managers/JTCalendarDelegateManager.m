@@ -161,4 +161,13 @@
     }
 }
 
+- (NSArray *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date {
+    if(_manager.delegate && [_manager.delegate respondsToSelector:@selector(calendar:eventColorsForDate:)]){
+        return [_manager.delegate calendar:self.manager eventColorsForDate:date];
+    } else {
+        return @[];
+    }
+}
+
+
 @end

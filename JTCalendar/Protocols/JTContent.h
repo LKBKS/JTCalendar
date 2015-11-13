@@ -21,5 +21,6 @@
 
 - (void)loadPreviousPageWithAnimation;
 - (void)loadNextPageWithAnimation;
-
+- (void)forceReload;
+- (void)reloadDayDotsView;
 @end

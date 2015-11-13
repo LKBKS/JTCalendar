@@ -121,6 +121,26 @@
     }
 }
 
+- (void)forceReload {
+    
+    for(NSUInteger i = 0; i < _numberOfWeeksDisplayed; i++){
+        UIView<JTCalendarWeek> *weekView = _weeksViews[i];
+        
+        weekView.hidden = NO;
+        [weekView forceReload];
+    }
+}
+
+- (void)reloadDayDotsView {
+    for(NSUInteger i = 0; i < _numberOfWeeksDisplayed; i++){
+        UIView<JTCalendarWeek> *weekView = _weeksViews[i];
+        
+        weekView.hidden = NO;
+        [weekView reloadDayDotsView];
+    }
+}
+
+
 - (void)layoutSubviews
 {    
     if(!_weeksViews){
