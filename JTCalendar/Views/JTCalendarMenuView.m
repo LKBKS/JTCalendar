@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
     JTCalendarPageModeCenterRight
 };
 
-@interface JTCalendarMenuView (){
+@interface JTCalendarMenuView () <UIScrollViewDelegate> {
     CGSize _lastSize;
     
     UIView *_leftView;
@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
     
     JTCalendarPageMode _pageMode;
 }
-
 @end
 
 @implementation JTCalendarMenuView
@@ -72,6 +71,8 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
         _scrollView.clipsToBounds = NO;
     }
 }
+
+#pragma mark
 
 - (void)layoutSubviews
 {
@@ -214,14 +215,31 @@ typedef NS_ENUM(NSInteger, JTCalendarPageMode) {
 
 - (BOOL)scrolling
 {
-        return self.scrollView.dragging || self.scrollView.decelerating;
+    return self.scrollView.dragging || self.scrollView.decelerating;
 }
 
 #pragma mark - UIScrollViewDelegate
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if(!decelerate){
+        [self notifyEndOfScrolling];
+    }
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self notifyEndOfScrolling];
+}
+
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    [self notifyEndOfScrolling];
+}
+
+- (void)notifyEndOfScrolling
 {
     [_manager.scrollManager endHorizontalScrollingAnimation];
 }
-
 @end
