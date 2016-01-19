@@ -37,6 +37,8 @@ typedef NS_ENUM(NSInteger, JTCalendarWeekDayFormat) {
 @property (nonatomic, strong) UIColor* weekendDayTextColor;
 @property (nonatomic, strong) UIColor* weekDayTextColor;
 @property (nonatomic) UIFont* weekDayTextFont;
+@property (nonatomic) CGFloat weekDayHeight;
+
 
 // MenuView
 @property (nonatomic) CGFloat menuMonthHeight;

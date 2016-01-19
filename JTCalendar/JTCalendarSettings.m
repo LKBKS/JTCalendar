@@ -34,6 +34,7 @@
     _weekendDayTextColor = [UIColor blackColor];
     _weekDayTextColor = [UIColor blackColor];
     _weekDayTextFont = [UIFont systemFontOfSize:12];
+    _weekDayHeight = 20.0;
     
     _dayDotDiameter = 5.0;
     _dayDotMargin = 2;
