@@ -45,6 +45,7 @@
     _dotRatio = 1. / 9.;
     _textLabelHeightRatio = 0.5;
     _textLabelTopSpaceConstant = 6.0;
+    _circleCenterOffset = 0.0;
     
     {
         _circleView = [UIView new];
@@ -107,7 +108,7 @@
     sizeDot = roundf(sizeDot);
     
     _circleView.frame = CGRectMake(0, 0, sizeCircle, sizeCircle);
-    _circleView.center = _textLabel.center;
+    _circleView.center = CGPointMake(_textLabel.center.x, _textLabel.center.y + _circleCenterOffset);
     _circleView.layer.cornerRadius = sizeCircle / 2.;
     
     _dotView.frame = CGRectMake(0, 0, sizeDot, sizeDot);

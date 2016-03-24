@@ -27,6 +27,7 @@
 @property (nonatomic) CGFloat dotRatio;
 @property (nonatomic) CGFloat textLabelTopSpaceConstant;
 @property (nonatomic) CGFloat textLabelHeightRatio;
+@property (nonatomic) CGFloat circleCenterOffset;
 
 @property (nonatomic) BOOL isFromAnotherMonth;
 
