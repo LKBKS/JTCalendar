@@ -144,9 +144,13 @@
 - (void)reload
 {
     static NSDateFormatter *dateFormatter = nil;
+
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
     if(!dateFormatter){
         dateFormatter = [_manager.dateHelper createDateFormatter];
         [dateFormatter setDateFormat:@"d"];
+    } else if (dateFormatter.timeZone.secondsFromGMT != localTimeZone.secondsFromGMT) {
+        dateFormatter.timeZone = localTimeZone;
     }
     
     _textLabel.text = [dateFormatter stringFromDate:_date];
