@@ -8,8 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @interface JTDateHelper : NSObject
-
-- (NSCalendar *)calendar;
+NS_ASSUME_NONNULL_BEGIN
 - (NSDateFormatter *)createDateFormatter;
 
 - (NSDate *)addToDate:(NSDate *)date months:(NSInteger)months;
@@ -30,5 +29,6 @@
 - (BOOL)date:(NSDate *)dateA isEqualOrBefore:(NSDate *)dateB;
 - (BOOL)date:(NSDate *)dateA isEqualOrAfter:(NSDate *)dateB;
 - (BOOL)date:(NSDate *)date isEqualOrAfter:(NSDate *)startDate andEqualOrBefore:(NSDate *)endDate;
-
+@property (nonatomic, nonnull, retain) NSCalendar* calendar;
+NS_ASSUME_NONNULL_END
 @end

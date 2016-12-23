@@ -13,7 +13,9 @@
 
 @end
 
+
 @implementation JTDateHelper
+@synthesize calendar = _calendar;
 
 - (NSCalendar *)calendar
 {
