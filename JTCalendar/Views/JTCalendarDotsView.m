@@ -10,7 +10,7 @@
 #import "JTCircleViewCell.h"
 
 @interface JTCalendarDotsView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>{
-    NSArray *eventColors;
+    NSArray<UIColor *> *eventColors;
 };
 @property (nonatomic, strong) UICollectionView *dotsCollectionView;
 
@@ -107,7 +107,7 @@
     _dotsCollectionView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 }
 
-- (void)setEventColors:(NSArray *)colors {
+- (void)setEventColors:(NSArray<UIColor *> *)colors {
     int maxSize = self.manager.settings.dayDotLineWidthLimit * self.manager.settings.dayDotLineHeightLimit;
     if (colors.count > maxSize) {
         eventColors = [colors subarrayWithRange:NSMakeRange(0, maxSize)];

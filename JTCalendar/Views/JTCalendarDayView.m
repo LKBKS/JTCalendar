@@ -164,7 +164,7 @@
 }
 
 - (void)reloadDotsView {
-    NSArray* colors = [_manager.delegateManager calendar:_manager eventColorsForDate:_date];
+    NSArray<UIColor *>* colors = [_manager.delegateManager calendar:_manager eventColorsForDate:_date];
     [_dotViews setEventColors:colors];
 }
 

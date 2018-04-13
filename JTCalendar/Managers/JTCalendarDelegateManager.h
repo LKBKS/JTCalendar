@@ -44,6 +44,6 @@
 
 - (void)prepareDayView:(UIView<JTCalendarDay> *)dayView;
 - (void)didTouchDayView:(UIView<JTCalendarDay> *)dayView;
-- (NSArray *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date;
+- (NSArray <UIColor *> *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date;
 
 @end

@@ -118,7 +118,7 @@
  */
 - (void)calendar:(JTCalendarManager *)calendar prepareDayView:(UIView<JTCalendarDay> *)dayView;
 
-- (NSArray *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date;
+- (NSArray<UIColor *> *)calendar:(JTCalendarManager *)calendar eventColorsForDate:(NSDate *)date;
 
 /*!
  * Indicate the dayView just get touched.
