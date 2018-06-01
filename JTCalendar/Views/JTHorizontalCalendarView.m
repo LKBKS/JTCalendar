@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, JTCalendarScrollingDirection) {
     
     switch (_pageMode) {
         case JTCalendarPageModeFull:
-            
+            [self forceReload];
             if(self.contentOffset.x < size.width / 2.){
                 [self loadPreviousPage];
             }
