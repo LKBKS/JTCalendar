@@ -80,8 +80,10 @@
 }
 
 - (UIColor *)colorForIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < eventColors.count) {
-        return eventColors[indexPath.row];
+    //HotFix for eventColors, _ContiguousArrayStorage.deinit
+    NSArray *eventColorsShallowCopy = [eventColors copy];
+    if (indexPath.row < eventColorsShallowCopy.count) {
+        return eventColorsShallowCopy[indexPath.row];
     } else {
         return [UIColor clearColor];
     }
