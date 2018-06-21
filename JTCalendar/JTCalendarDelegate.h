@@ -125,4 +125,9 @@
  */
 - (void)calendar:(JTCalendarManager *)calendar didTouchDayView:(UIView<JTCalendarDay> *)dayView;
 
+/*!
+ * Called when dot view is loaded with event color error.
+ */
+- (void)calendar:(nonnull JTCalendarManager *)calendar failedToLoadEventColorWithError:(nonnull NSError *)error;
+
 @end

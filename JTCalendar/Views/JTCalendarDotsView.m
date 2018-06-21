@@ -83,9 +83,26 @@
     //HotFix for eventColors, _ContiguousArrayStorage.deinit
     NSArray *eventColorsShallowCopy = [eventColors copy];
     if (indexPath.row < eventColorsShallowCopy.count) {
+        //Exceptional case: colors tab is out of sync
+        if (indexPath.row >= eventColors.count) {
+            NSString *errorMsg = [NSString stringWithFormat:@"@EventColors:%@ is out of sync with indexPath:%@ eventColorsShallowCopy:%@",
+                                  eventColors, indexPath, eventColorsShallowCopy];
+            [self reportEventColorErrorWithMessage:errorMsg];
+        }
         return eventColorsShallowCopy[indexPath.row];
     } else {
+        //Exceptional case: no corresponding color for indexPath
+        NSString *errorMsg = [NSString stringWithFormat:@"No coresponding color for indexPath:%@ eventColors:%@ eventColorsShallowCopy:%@",
+                              indexPath, eventColors, eventColorsShallowCopy];
+        [self reportEventColorErrorWithMessage:errorMsg];
         return [UIColor clearColor];
+    }
+}
+
+- (void)reportEventColorErrorWithMessage:(NSString *)msg {
+    if (msg && [self.manager.delegate respondsToSelector:@selector(calendar:failedToLoadEventColorWithError:)]) {
+        NSError *error = [NSError errorWithDomain:@"JTCalendar" code:0 userInfo:@{NSLocalizedDescriptionKey:msg}];
+        [self.manager.delegate calendar:self.manager failedToLoadEventColorWithError:error];
     }
 }
 
